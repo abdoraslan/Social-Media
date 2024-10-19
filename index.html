@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="node_modules/axios/dist/axios.js"></script>
+    <link rel="stylesheet" href="css/main.css">
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/all.min.css">
+    <title>Social Media</title>
+</head>
+
+<body>
+      <!-- loader -->
+      <div id="loader" style="border: 1em; border-radius: .8em ; color: white; background-color:#c9c7c79e; z-index: 99999; position: fixed; left: 50%; top: 50%; transform: translate(-50%,-50%);" class="lds-roller">
+        <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+    </div>
+    <!-- --------- -->
+    <!--  Login -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Username:</label>
+                            <input type="text" class="form-control" id="username">
+                        </div>
+                        <div class="mb-3">
+                            <label for="message-text" class="col-form-label">Password:</label>
+                            <input type="password" class="form-control" id="password"></input>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button id="login" type="button" class="btn btn-primary">Login</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- *************** -->
+    <!-- alert -->
+    <div id="liveAlertPlaceholder"></div>
+    <!-- *************** -->
+    <!--  Register -->
+    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Register A New User</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Name:</label>
+                            <input type="text" class="form-control" id="name-register">
+                        </div>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Username:</label>
+                            <input type="text" class="form-control" id="username-register">
+                        </div>
+                        <div class="mb-3">
+                            <label for="message-text" class="col-form-label">Password:</label>
+                            <input type="password" class="form-control" id="password-register"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="message-text" class="col-form-label">Image:</label>
+                            <input type="file" class="form-control" id="image-register"></input>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button id="register" type="button" class="btn btn-primary">Register</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- *************** -->
+
+    <!-- add post -->
+    <button style="z-index: 1;" title="Add Post" id="add-post" data-bs-toggle="modal" data-bs-target="#addPosts"
+        class="btn btn-primary rounded-circle fixed-button">
+        <i class="fa-solid fa-plus"></i>
+    </button>
+    <!-- *************** -->
+
+    <!--add post   -->
+    <div class="modal fade" id="addPosts" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">New Post</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Title:</label>
+                            <input type="text" class="form-control" id="title">
+                        </div>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Body:</label>
+                            <textarea type="text" class="form-control" id="body"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="message-text" class="col-form-label">Image:</label>
+                            <input type="file" class="form-control" id="image" accept="image/*">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button id="create" type="button" class="btn btn-primary">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- *************** -->
+    <!--edit post   -->
+    <div class="modal fade" id="edit-post" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Post</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Title:</label>
+                            <input type="text" class="form-control" id="edit-title">
+                        </div>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Body:</label>
+                            <textarea type="text" class="form-control" id="edit-body"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="message-text" class="col-form-label">Image:</label>
+                            <input type="file" class="form-control" id="edit-image" accept="image/*">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button id="edit" type="button" class="btn btn-primary">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- *************** -->
+    <div class="parent">
+        <div class="col-12">
+            <div class="container">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
+                  <div>
+                    <a class="navbar-brand" href="index.html" id="tarmeez-logo">Tarmeez</a>
+                    <div class="navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item">
+                                <a style="margin-right: 1em;" id="profileLink" class="nav-link" href="">Profile</a>
+                            </li>
+                        </ul>
+                    </div>
+                  </div>     
+                  <div class="buttons">
+                            <button id="login-nav" type="button" class="btn btn-outline-success" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal">Login</button>
+                            <button id="register-nav" type="button" class="btn btn-outline-success"
+                                data-bs-toggle="modal" data-bs-target="#exampleModal2">Register</button>
+                  </div>
+                  <div class="buttons logout">
+                            <div style="display: inline-block;" class="username mb-2">
+                                <img id="user-image" src="" alt="">
+                                <b id="user"></b>
+                            </div>
+                            <button  id="logout-nav" type="button" class="btn btn-outline-danger">Log out</button>
+                   </div>   
+                </nav>
+                
+                <div id="posts" class="mt-5">
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+<script src="js/mainLogic.js"></script>
+<script src="js/indexScript.js"></script>
+
+</html>
