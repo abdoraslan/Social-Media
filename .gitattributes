@@ -1,0 +1,19 @@
+# Normalize line endings to LF for HTML, CSS, JS
+*.html text eol=lf
+*.css text eol=lf
+*.js text eol=lf
+bootstrap/* text eol=lf
+
+# Ensure diff support for text files
+*.html diff
+*.css diff
+*.js diff
+
+# Binary files (images) should not be diffed
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+
+# Optional: Lock Bootstrap files (if necessary)
+bootstrap/* lock
